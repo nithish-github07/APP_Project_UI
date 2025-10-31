@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Micro-Farms Network</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #b8e994;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #78e08f 0%, #38ada9 100%);
+            padding: 120px 2rem 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s;
+        }
+
+        .cta-button {
+            background: white;
+            color: #2d5016;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 1.2s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+        }
+
+        /* Objectives Section */
+        .objectives-section {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .objectives-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .objective-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 2rem;
+            border-radius: 15px;
+            border-left: 5px solid #4a7c2c;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .objective-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .objective-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .objective-card h3 {
+            color: #2d5016;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .objective-card p {
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* Schemes Section */
+        .schemes-section {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, #f0f8f0 0%, #e8f5e9 100%);
+        }
+
+        .schemes-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .schemes-category {
+            margin-bottom: 3rem;
+        }
+
+        .schemes-category h3 {
+            color: #2d5016;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #4a7c2c;
+        }
+
+        .scheme-item {
+            background: white;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .scheme-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .scheme-item h4 {
+            color: #4a7c2c;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .scheme-item p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .state-schemes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .state-scheme-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .state-scheme-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .state-name {
+            color: #2d5016;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .scheme-name {
+            color: #4a7c2c;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .scheme-desc {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #2d5016;
+            margin-bottom: 1rem;
+        }
+
+        /* SDG Section */
+        .sdg-section {
+            padding: 80px 2rem;
+            background: white;
+        }
+
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sdg-card {
+            background: linear-gradient(135deg, #78e08f 0%, #38ada9 100%);
+            padding: 1.5rem;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .sdg-card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Impact Section */
+        .impact {
+            padding: 80px 2rem;
+            background: linear-gradient(135deg, #2d5016 0%, #4a7c2c 100%);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 2rem auto 0;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 2rem;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #4a7c2c;
+        }
+
+        .submit-btn {
+            background: #4a7c2c;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #2d5016;
+        }
+
+        /* Footer */
+        footer {
+            background: #2d5016;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                Urban Micro-Farms Network
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#objectives">Objectives</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#schemes">Schemes</a></li>
+                <li><a href="#sdg">SDG Goals</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Transform Urban Spaces into Green Havens</h1>
+        <p>Join the revolution of sustainable urban farming</p>
+        <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Started Today</button>
+    </section>
+
+    <!-- Objectives Section -->
+    <section class="objectives-section" id="objectives">
+        <h2 class="section-title">Project Objectives</h2>
+        <div class="objectives-container">
+            <div class="objective-card">
+                <div class="objective-icon">🌾</div>
+                <h3>Promote Food Sovereignty</h3>
+                <p>Empower individuals and communities to grow their own food, reducing dependence on commercial supply chains and enabling residents to reclaim control over what they eat.</p>
+            </div>
+            <div class="objective-card">
+                <div class="objective-icon">🏢</div>
+                <h3>Utilize Underused Urban Spaces</h3>
+                <p>Transform idle rooftops, balconies, and small yards in densely populated urban areas into productive micro-farms, making cities more self-sustaining and greener.</p>
+            </div>
+            <div class="objective-card">
+                <div class="objective-icon">📖</div>
+                <h3>Create Learning Ecosystems</h3>
+                <p>Integrate hands-on learning through training and workshops on urban farming, composting, hydroponics, and sustainable agriculture for schools, colleges, and NGOs.</p>
+            </div>
+            <div class="objective-card">
+                <div class="objective-icon">🤝</div>
+                <h3>Build Community Resilience</h3>
+                <p>Connect individuals from different communities through a peer-to-peer platform for sharing ideas, experiences, and support, strengthening community bonds.</p>
+            </div>
+            <div class="objective-card">
+                <div class="objective-icon">💼</div>
+                <h3>Encourage Micro-Entrepreneurship</h3>
+                <p>Create opportunities for small-scale income generation through local sales, compost businesses, seed sharing, and training services, promoting job creation and women's empowerment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">Why Urban Micro-Farms?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🏡</div>
+                <h3>Utilize Unused Spaces</h3>
+                <p>Transform rooftops, balconies, and terraces into productive farms</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌿</div>
+                <h3>Fresh & Healthy Food</h3>
+                <p>Grow organic, pesticide-free vegetables right at your doorstep</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Community Building</h3>
+                <p>Connect with fellow urban farmers and share knowledge</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Economic Empowerment</h3>
+                <p>Create micro-entrepreneurship opportunities in your community</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Environmental Impact</h3>
+                <p>Reduce carbon footprint and promote sustainable living</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Learning & Growth</h3>
+                <p>Hands-on education in sustainable agriculture practices</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDG Section -->
+    <section class="sdg-section" id="sdg">
+        <h2 class="section-title">Aligned with UN Sustainable Development Goals</h2>
+        <div class="sdg-grid">
+            <div class="sdg-card">SDG 1<br>No Poverty</div>
+            <div class="sdg-card">SDG 2<br>Zero Hunger</div>
+            <div class="sdg-card">SDG 3<br>Good Health</div>
+            <div class="sdg-card">SDG 4<br>Quality Education</div>
+            <div class="sdg-card">SDG 5<br>Gender Equality</div>
+            <div class="sdg-card">SDG 6<br>Clean Water</div>
+            <div class="sdg-card">SDG 8<br>Economic Growth</div>
+            <div class="sdg-card">SDG 10<br>Reduced Inequalities</div>
+            <div class="sdg-card">SDG 11<br>Sustainable Cities</div>
+            <div class="sdg-card">SDG 12<br>Responsible Consumption</div>
+            <div class="sdg-card">SDG 13<br>Climate Action</div>
+            <div class="sdg-card">SDG 17<br>Partnerships</div>
+        </div>
+    </section>
+
+    <!-- Schemes Section -->
+    <section class="schemes-section" id="schemes">
+        <h2 class="section-title">Government Schemes & Support</h2>
+        <div class="schemes-container">
+            <div class="schemes-category">
+                <h3>🇮🇳 National Level Schemes</h3>
+                <div class="scheme-item">
+                    <h4>Atmanirbhar Bharat Abhiyan</h4>
+                    <p>Encourages local entrepreneurship in urban agriculture, building food sovereignty and local resilience.</p>
+                </div>
+                <div class="scheme-item">
+                    <h4>National Urban Livelihoods Mission (NULM)</h4>
+                    <p>Promotes self-employment and micro-enterprise development among the urban poor engaged in agricultural activities.</p>
+                </div>
+                <div class="scheme-item">
+                    <h4>Startup India</h4>
+                    <p>Promotes agri-tech startups like hydroponics, rooftop farming, and indoor farm technologies.</p>
+                </div>
+                <div class="scheme-item">
+                    <h4>PM Formalization of Micro Food Processing Enterprises (PM-FME)</h4>
+                    <p>Facilitates micro food processing units to scale up urban farm-to-market initiatives.</p>
+                </div>
+                <div class="scheme-item">
+                    <h4>Swachh Bharat Mission - Urban</h4>
+                    <p>Encourages community-scale composting as part of solid waste management goals, with focus on farm-to-waste direct linkages.</p>
+                </div>
+            </div>
+
+            <div class="schemes-category">
+                <h3>🏛️ State Level Schemes</h3>
+                <div class="state-schemes-grid">
+                    <div class="state-scheme-card">
+                        <div class="state-name">Tamil Nadu</div>
+                        <div class="scheme-name">Namma Ooru Supermarket Initiative</div>
+                        <p class="scheme-desc">Supports selling of locally grown produce through micro-level retail networks (Pilot under TNULM).</p>
+                    </div>
+                    <div class="state-scheme-card">
+                        <div class="state-name">Kerala</div>
+                        <div class="scheme-name">Haritha Keralam Mission</div>
+                        <p class="scheme-desc">Comprehensive program for organic farming, waste recycling, and urban sustainability.</p>
+                    </div>
+                    <div class="state-scheme-card">
+                        <div class="state-name">Maharashtra</div>
+                        <div class="scheme-name">Majhi Vasundhara Abhiyan 2.0</div>
+                        <p class="scheme-desc">Focus on rooftop greening, rainwater harvesting, and urban garden expansion.</p>
+                    </div>
+                    <div class="state-scheme-card">
+                        <div class="state-name">Delhi</div>
+                        <div class="scheme-name">Green Delhi Initiative</div>
+                        <p class="scheme-desc">Promotes terrace farming through technical support and subsidies.</p>
+                    </div>
+                    <div class="state-scheme-card">
+                        <div class="state-name">Karnataka</div>
+                        <div class="scheme-name">Bhoochetana Plus</div>
+                        <p class="scheme-desc">Soil health management extended to urban farm settings, including nutrient optimization for vertical gardens.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact" id="impact">
+        <h2 class="section-title">Our Impact</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">500+</span>
+                <span>Micro-Farms Established</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">40%</span>
+                <span>Waste Reduction</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1000+</span>
+                <span>Community Members</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">15+</span>
+                <span>Partner Organizations</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Join Our Network</h2>
+        <p>Start your urban farming journey today!</p>
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thank you for your interest! We will contact you soon.');">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <input type="tel" placeholder="Phone Number">
+            <textarea rows="5" placeholder="Tell us about your space and interest..." required></textarea>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Urban Micro-Farms Network | PSG College of Technology</p>
+        <p>Dharshini R | Jayasurya S | Mohana V | Naveen Prabu D | Nithish S | Suhaash M | Alagesan V</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .sdg-card, .stat-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
